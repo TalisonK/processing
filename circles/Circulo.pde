@@ -19,7 +19,7 @@ class Circulo {
 
   void show() {
     stroke(255);
-    strokeWeight(3);
+    strokeWeight(1);
     fill(0);
     ellipse(x, y, d, d);
   }
@@ -28,16 +28,20 @@ class Circulo {
     d++;
   }
 
-  void colide(Circulo c){
+  boolean colide(Circulo c){
+    double somax = this.x - c.x;
+    double somay = this.y - c.y;
+    double distancia = Math.sqrt(somax * somax + somay * somay);
+    
+    return (distancia < this.d + c.d);
     
   }
 
-
-  void walls() {
-    if (this.x <= 0 || this.x + d >= 1000) {
+  void walls(int w) {
+    if (this.x <= 0 || this.x + d >= w) {
       this.vx *= -1;
     }
-    if (this.y <= 0 || this.y + d >= 1000) {
+    if (this.y <= 0 || this.y + d >= w) {
       this.vy *= -1;
     }
   }
